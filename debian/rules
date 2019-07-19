@@ -1,11 +1,17 @@
 #!/usr/bin/make -f
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 export LC_ALL = C.UTF-8
+#export python = import('python3.7')
+export python3=/usr/bin/python3.7
+#export PYTHONPATH="${PYTHONPATH}:/usr/bin/python3.7"
+#export PYTHONPATH="${PYTHONPATH}:/my/other/path"
 
 %:
 	dh $@ --with python3
 
 override_dh_auto_configure:
+	#ln -s /usr/lib/python3.7/site-packages/piper /usr/lib/python3/dist-packages
+	#alias python3='/usr/bin/python3.7'
 	dh_auto_configure -- -Dudev-dir=/lib/udev -Dsystemd-unit-dir=/lib/systemd/system
 
 override_dh_auto_install:
