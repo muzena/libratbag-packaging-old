@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+export LC_ALL = C.UTF-8
+
+%:
+	dh $@ --with python3
+
+override_dh_auto_configure:
+	dh_auto_configure -- -Dudev-dir=/lib/udev -Dsystemd-unit-dir=/lib/systemd/system
+
+override_dh_auto_install:
+	find . -name \*.md5 -delete
+	chmod 644 data/devices/*.device
+	dh_auto_install
+
+override_dh_missing:
+	dh_missing --list-missing

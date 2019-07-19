@@ -1,0 +1,3 @@
+disable-ratbagctl-test.patch
+disable-valgrind.patch
+manpage-fixes.patch
